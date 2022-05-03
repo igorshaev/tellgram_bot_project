@@ -75,9 +75,13 @@ def func(message):
         game_check = 0
         try:
             d = int(message.text)
-            cur.execute(f"""DELETE from first  WHERE id = {d}""").fetchall()
-            con.commit()
-            bot.send_message(message.chat.id, text='Тренировка удалена.')
+            g = cur.execute(f"""SELECT * FROM first WHERE id = {prac_numb};""").fetchall()
+            if len(g) == 0:
+                bot.send_message(message.chat.id, text='Такой игры нет.')
+            else:
+                cur.execute(f"""DELETE from first  WHERE id = {d}""").fetchall()
+                con.commit()
+                bot.send_message(message.chat.id, text='Тренировка удалена.')
         except:
             bot.send_message(message.chat.id, text='Не корректное число.')
     elif message.text == 'Удаление игры':
@@ -96,9 +100,13 @@ def func(message):
         game_check = 0
         try:
             d = int(message.text)
-            cur.execute(f"""DELETE from game WHERE id = {d}""").fetchall()
-            con.commit()
-            bot.send_message(message.chat.id, text='Игра удалена.')
+            g = cur.execute(f"""SELECT * FROM first WHERE id = {prac_numb};""").fetchall()
+            if len(g) == 0:
+                bot.send_message(message.chat.id, text='Такой игры нет.')
+            else:
+                cur.execute(f"""DELETE from game WHERE id = {d}""").fetchall()
+                con.commit()
+                bot.send_message(message.chat.id, text='Игра удалена.')
         except:
             bot.send_message(message.chat.id, text='Не корректное число.')
 
@@ -109,7 +117,7 @@ def func(message):
                 prac_numb = int(str(i[0])) + 1
         else:
             prac_numb = 1
-        bot.send_message(message.chat.id, text='Напишите дату тренировки в формате DD.MM.YYYY')
+        bot.send_message(message.chat.id, text='Напишите дату игры в формате DD.MM.YYYY')
         game_check = 3
     elif game_check == 3:
         try:
@@ -118,7 +126,7 @@ def func(message):
             game_check = 4
             cur.execute(f"""INSERT INTO game(id, info, names, date) VALUES({prac_numb}, '', '', '{date}')""").fetchall()
             con.commit()
-            bot.send_message(message.chat.id, text='Напишите информацию о тренировке:')
+            bot.send_message(message.chat.id, text='Напишите информацию о игре:')
         except:
             bot.send_message(message.chat.id, text='Неверный формат даты, попробуйте еще раз.')
             game_check = 3
