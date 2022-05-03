@@ -59,6 +59,7 @@ def func(message):
         game_check = 0
         cur.execute(f"""UPDATE first SET info = '{d}' WHERE id = {prac_numb}""").fetchall()
         con.commit()
+        bot.send_message(message.chat.id, text='Новая тренировка создана.')
     elif message.text == 'Удаление тренировки':
         game_check = 8
         g = cur.execute(f"""SELECT * FROM first;""").fetchall()
@@ -135,6 +136,7 @@ def func(message):
         game_check = 0
         cur.execute(f"""UPDATE game SET info = '{d}' WHERE id = {prac_numb}""").fetchall()
         con.commit()
+        bot.send_message(message.chat.id, text='Новая игра создана.')
     elif message.text == 'Игра':
         g = cur.execute(f"""SELECT * FROM game;""").fetchall()
         s = ''
