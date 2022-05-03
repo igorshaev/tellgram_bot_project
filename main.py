@@ -134,7 +134,7 @@ def func(message):
         for i in g:
             d = datetime.datetime.strptime(i[3], '%Y-%m-%d')
             today = datetime.datetime.now()
-            if (d - today).days >= 0 and (d - today).days < 30:
+            if (d - today).days >= -1 and (d - today).days < 30:
                 s = s + f'Игра номер {i[0]}, информация о игре: {i[1]}, дата игры: {i[3]}{n}'
         if s == '':
             bot.send_message(message.chat.id, text='Игр в ближайшее время нет.')
@@ -149,7 +149,7 @@ def func(message):
         for i in g:
             d = datetime.datetime.strptime(i[3], '%Y-%m-%d')
             today = datetime.datetime.now()
-            if (d - today).days >= 0 and (d - today).days < 7:
+            if (d - today).days >= -1 and (d - today).days < 7:
                 s = s + f'Тренировка номер {i[0]}, информация о тренировке: {i[1]}, дата тренировки: {i[3]}{n}'
         if s == '':
             bot.send_message(message.chat.id, text='Тренировок в ближайшее время нет.')
