@@ -76,7 +76,7 @@ def func(message):
         game_check = 0
         try:
             d = int(message.text)
-            g = cur.execute(f"""SELECT * FROM first WHERE id = {prac_numb};""").fetchall()
+            g = cur.execute(f"""SELECT * FROM first WHERE id = {d};""").fetchall()
             if len(g) == 0:
                 bot.send_message(message.chat.id, text='Такой игры нет.')
             else:
@@ -101,7 +101,7 @@ def func(message):
         game_check = 0
         try:
             d = int(message.text)
-            g = cur.execute(f"""SELECT * FROM first WHERE id = {prac_numb};""").fetchall()
+            g = cur.execute(f"""SELECT * FROM game WHERE id = {d};""").fetchall()
             if len(g) == 0:
                 bot.send_message(message.chat.id, text='Такой игры нет.')
             else:
